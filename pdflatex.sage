@@ -4,13 +4,15 @@ import os
 
 
 def pp(texCode, mode=1):
-    """@todo: Docstring for pp.
-    pp is 'pretty print'. It is a wrapper to the latex
-    command, that additionally writes it to a fixed tex file
+    """Pretty printing for sage objects. 
+    pp is 'pretty print'. It is a wrapper to the latex()
+    function, that additionally writes it to a fixed .tex file
     and compiles it. That pdf file can remain open in a pdf
     viewer which support automatically reload. This gives
     sort of a "live view" of the whatever sage objects you
     want, from the shell.
+    mode=1 uses the 'article' class and 'dmath' environment
+    mode=2 uses the 'standalone' class and 'equation'
     :returns: Exit status of the pdflatex command.
     """
 
