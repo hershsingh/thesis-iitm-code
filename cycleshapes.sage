@@ -1,7 +1,5 @@
 # Author: Hersh Singh [hershdeep@gmail.com]
 # Date: April 18, 2014
-# Description: Get all balanced cycle shapes of a number N
-
 
 N=12
 
@@ -9,7 +7,6 @@ plists = Partitions(N).list()
 
 # Takes a Partition object and checks if it is balanced.
 def CheckBalancedCycle(plist):
-    M = lcm(plist)
     M = plist[0]*plist[-1]
 
     if not M%lcm(plist) == 0:
