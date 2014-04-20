@@ -1,7 +1,7 @@
 # Author: Hersh Singh [hershdeep@gmail.com]
 # Date: April 18, 2014
 
-N=12
+N=24
 
 plists = Partitions(N).list()
 
@@ -29,7 +29,7 @@ def GetAllBalancedCycles(k=0):
 
     number_balancedcycles = 0
     if not k==0:
-        for plist in [plist for plist in plists if sum(plist.to_exp())==2*k]:
+        for plist in [plist for plist in plists if len(plist)==2*k]:
             is_balanced, M = CheckBalancedCycle(plist)
             if is_balanced:
                 number_balancedcycles = number_balancedcycles + 1
@@ -37,7 +37,7 @@ def GetAllBalancedCycles(k=0):
     else:
         for k in range(1,N/2):
             print "k =",k
-            for plist in [plist for plist in plists if sum(plist.to_exp())==2*k]:
+            for plist in [plist for plist in plists if len(plist)==2*k]:
                 is_balanced, M = CheckBalancedCycle(plist)
                 if is_balanced:
                     number_balancedcycles = number_balancedcycles + 1
@@ -56,7 +56,7 @@ def LatexTableOfCharacters():
         else:
             str_prepend = ""
 
-        plists_k = [plist for plist in plists if sum(plist.to_exp())==2*k]
+        plists_k = [plist for plist in plists if len(plist)==2*k]
 
         if not plists_k:
             continue
