@@ -7,42 +7,24 @@ N=12
 
 plists = Partitions(N).list()
 
-# Get the multplicative representation
-# pmult[i] is the factor besides (i+1) 
-
-
-
-# Takes a multplicative representationg of a partition and checks if it is balanced
+# Takes a Partition object and checks if it is balanced.
 def CheckBalancedCycle(plist):
-    p_set = list(set(plist))
-    p_set.sort()
+    M = lcm(plist)
+    M = plist[0]*plist[-1]
 
-    p_mult = plist.to_exp()
+    if not M%lcm(plist) == 0:
+        return False, 0
 
-    #mult_exp = p_mult[p_set[-1]-1]/p_mult[p_set[0]-1]
-    M = p_set[-1]*p_set[0]
-    p_set_new = list(p_set)
-    p_mult_new = list(p_mult)
+    plist_new = [M/i for i in plist]
+    plist_new.sort()
+    plist_new.reverse()
 
-    if not M%lcm(p_set)==0:
-        return False,M
+    if plist_new == plist:
+        return True, M
+    else:
+        return False, 0
 
-
-    for index,element in enumerate(p_set):
-        element_new = M/element
-
-        if not element_new == p_set[-index-1]:
-            return False,M
-
-        #print element, element_new
-        p_set_new[index] = element_new
-        p_mult_new[element_new-1] = p_mult[element-1]
-        p_mult_new[element-1] = p_mult[element_new-1]
-
-    #print p_mult_new, p_mult
-    return p_mult_new == p_mult,M
-
-#print CheckBalancedCycle(Partition([14,7,2,1]))
+CheckBalancedCycle(plist)
 
 def GetAllBalancedCycles(k=0):
     # If k=0, return the complete table
