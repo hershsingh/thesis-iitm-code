@@ -1,15 +1,17 @@
-N=24
+N=12
 
 plists = Partitions(N).list()
 
-num_truncate = 100 # Max order of stuff
+num_truncate = 500 # Max order of stuff
 
-# The eta product expansion is valid only till order num_truncate*min(plist)
-n_max = num_truncate*min(plist)
+# The eta product expansion is valid only till order
+# num_truncate*min(plist)
+n_max = num_truncate
 
-# Generate a list of all pairs of coprimes such that their product is less than n_max
-coprimes = [[x,y] for x in range(1,n_max) for y in range(1,x) if gcd(x,y)==1 and x*y<n_max]
-
+# Generate a list of all pairs of coprimes such that their product is
+# less than n_max
+coprimes = [[x,y] for x in range(1,n_max) for y in range(1,x) \
+        if gcd(x,y)==1 and x*y<n_max]
 
 # Eta expansion
 q = var('q')
@@ -18,7 +20,7 @@ eta_exp = q1*q^(1/24)
 
 # Get the coeff
 def etacoeff(i):
-    return etaproduct.coeff(q^(i))
+    return etaproduct.coeff(q^(i/2))
 
 # Number of possible multiplicative functions
 num_multiplicative = 0 
@@ -26,7 +28,8 @@ num_multiplicative = 0
 # Loop over all balanced cycles
 for plist in balanced_cycles:
 
-    # Generate the eta product expansion, valid only till order num_truncate*min(plist)
+    # Generate the eta product expansion, valid only till order
+    # num_truncate*min(plist)
     etaproduct = 1
     for num in plist:
         etaproduct = etaproduct * eta_exp.subs(q=q^num)
@@ -47,4 +50,4 @@ for plist in balanced_cycles:
 
 print "No of possible multiplicative functions =", num_multiplicative
 
-# vim: ft=python
+#vim: ft=python
